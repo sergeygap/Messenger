@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "622173168261",
+    "project_id": "messenger-4f83e",
+    "storage_bucket": "messenger-4f83e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:622173168261:android:39bb643c9e8e90bb0abfec",
+        "android_client_info": {
+          "package_name": "com.gap.messenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "622173168261-nq2u11ugak1p1gd63gqdb6af5ldtfad0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlBrGa8QJNcuYCgErwHpdon2mmkORrw5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "622173168261-nq2u11ugak1p1gd63gqdb6af5ldtfad0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
