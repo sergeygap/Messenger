@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Messenger</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">login</string>
+    <string name="forgot_password">Forgot password</string>
+    <string name="register">Registration</string>
+    <string name="your_email">Your email</string>
+    <string name="reset_password">reset password</string>
+    <string name="name">Name</string>
+    <string name="sign_out">sign out</string>
 </resources>
