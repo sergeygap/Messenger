@@ -12,14 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.gap.messenger.ListDialogsActivity;
 import com.gap.messenger.R;
 import com.gap.messenger.forgotPassword.ForgotPasswordActivity;
+import com.gap.messenger.listDialogs.ListDialogsActivity;
 import com.gap.messenger.register.RegistrationActivity;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -69,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
         viewModel.setLogin(new LoginViewModel.Login() {
             @Override
             public void launchListDialogs() {
-               Intent intent = ListDialogsActivity.newIntent(MainActivity.this);
-               startActivity(intent);
+                Intent intent = ListDialogsActivity.newIntent(MainActivity.this);
+                startActivity(intent);
             }
 
             @Override
@@ -85,7 +82,11 @@ public class MainActivity extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewModel.login(email.getText().toString(), password.getText().toString());
+                String em = email.getText().toString().trim();
+                String pa = password.getText().toString().trim();
+                if (em != "" && pa != "") {
+                    viewModel.login(email.getText().toString(), password.getText().toString());
+                }
             }
         });
 
@@ -106,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
 
 
     private void initViews() {

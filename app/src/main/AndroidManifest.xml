@@ -15,16 +15,22 @@
         android:theme="@style/Theme.Messenger"
         tools:targetApi="31">
         <activity
-            android:name=".ListDialogsActivity"
+            android:name=".listDialogs.ListDialogsActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".register.RegistrationActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".forgotPassword.ForgotPasswordActivity"
+            android:windowSoftInputMode="adjustResize"
+
             android:exported="false" />
         <activity
             android:name=".login.MainActivity"
+            android:windowSoftInputMode="adjustResize"
+
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
