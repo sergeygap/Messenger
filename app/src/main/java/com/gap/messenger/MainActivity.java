@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.gap.messenger.forgotPassword.ForgotPasswordActivity;
+import com.gap.messenger.register.RegistrationActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
 
     private TextView forgotPassword;
+    private TextView register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,9 +96,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = RegistrationActivity.newIntent(MainActivity.this);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void initViews() {
         forgotPassword = findViewById(R.id.forgot_password);
+        register = findViewById(R.id.register);
     }
 }

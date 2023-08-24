@@ -18,10 +18,10 @@
             android:name=".ListDialogsActivity"
             android:exported="false" />
         <activity
-            android:name=".RegistrationActivity"
+            android:name=".register.RegistrationActivity"
             android:exported="false" />
         <activity
-            android:name=".ForgotPasswordActivity"
+            android:name=".forgotPassword.ForgotPasswordActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
