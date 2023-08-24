@@ -1,4 +1,4 @@
-package com.gap.messenger.register;
+package com.gap.messenger.login;
 
 import android.app.Application;
 
@@ -10,15 +10,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class RegistrationViewModel extends AndroidViewModel {
-    public RegistrationViewModel(@NonNull Application application) {
+public class LoginViewModel extends AndroidViewModel {
+    public LoginViewModel(@NonNull Application application) {
         super(application);
-    }
-
-    private Registration registration;
-
-    public void setRegistration(Registration registration) {
-        this.registration = registration;
     }
 
     private FirebaseAuth auth;
@@ -27,25 +21,31 @@ public class RegistrationViewModel extends AndroidViewModel {
         this.auth = auth;
     }
 
-    public void registration(String email, String password) {
-        auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+    private Login login;
+
+    public void setLogin(Login login) {
+        this.login = login;
+    }
+
+    public void login(String email, String password) {
+        auth.signInWithEmailAndPassword(email, password)
+                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        registration.launchMainActivity();
+                        login.launchListDialogs();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        registration.makeToast(String.valueOf(e.getMessage()));
+                        login.makeToast(e.getMessage());
                     }
                 });
     }
 
-    public interface Registration {
+    public interface Login {
+        void launchListDialogs();
         void makeToast(String text);
-
-        void launchMainActivity();
     }
 
 }
