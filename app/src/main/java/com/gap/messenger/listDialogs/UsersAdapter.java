@@ -2,6 +2,7 @@ package com.gap.messenger.listDialogs;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,12 +46,13 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
         String userInfo = String.format("%s %s, %s", user.getName(), user.getLastName(), user.getAge());
         holder.textViewUserInfo.setText(userInfo);
         int bgResId;
-        if (user.getOnline()) {
-            bgResId = R.drawable.circle_green;
-        } else {
-            bgResId = R.drawable.circle_red;
-        }
-        Drawable background = ContextCompat.getDrawable(holder.itemView.getContext(), bgResId);
+        Log.d("TAGTAG", "onBindViewHolder: " + user.isOnline());
+//        if (user.getOnline()) {
+//            bgResId = R.drawable.circle_green;
+//        } else {
+//            bgResId = R.drawable.circle_red;
+//        }
+        Drawable background = ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.circle_red);
         holder.isStatus.setBackground(background);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

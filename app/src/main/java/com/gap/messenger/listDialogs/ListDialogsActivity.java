@@ -1,22 +1,23 @@
 package com.gap.messenger.listDialogs;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.gap.messenger.ChatActivity;
 import com.gap.messenger.R;
 import com.gap.messenger.login.MainActivity;
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -26,7 +27,6 @@ public class ListDialogsActivity extends AppCompatActivity {
     private ListDialogsViewModel viewModel;
     private UsersAdapter usersAdapter;
     private RecyclerView recyclerView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +34,13 @@ public class ListDialogsActivity extends AppCompatActivity {
         initViews();
         viewModelSignOut();
         adapterClickOnItem();
+
+        viewModel.getListUsersLD().observe(ListDialogsActivity.this, new Observer<List<User>>() {
+            @Override
+            public void onChanged(List<User> users) {
+                usersAdapter.setUsers(users);
+            }
+        });
 
 
     }
@@ -79,8 +86,6 @@ public class ListDialogsActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 
 
     public static Intent newIntent(Context context) {
