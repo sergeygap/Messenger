@@ -4,12 +4,14 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.ViewModel;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ListDialogsViewModel extends AndroidViewModel {
-    public ListDialogsViewModel(@NonNull Application application) {
-        super(application);
+public class ListDialogsViewModel extends ViewModel {
+    private FirebaseAuth auth;
+    public ListDialogsViewModel() {
+        auth = FirebaseAuth.getInstance();
     }
 
     private SignOut signOut;
@@ -18,11 +20,7 @@ public class ListDialogsViewModel extends AndroidViewModel {
         this.signOut = signOut;
     }
 
-    private FirebaseAuth auth;
 
-    public void setAuth(FirebaseAuth auth) {
-        this.auth = auth;
-    }
 
     public void signOut() {
         auth.signOut();

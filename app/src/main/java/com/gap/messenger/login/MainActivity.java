@@ -1,5 +1,6 @@
 package com.gap.messenger.login;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.gap.messenger.R;
@@ -38,38 +40,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
-        viewModel.setAuth(FirebaseAuth.getInstance());
         clickListeners();
         viewModelLogin();
-        auth = FirebaseAuth.getInstance();
+        observeUserLD();
+    }
 
-
-        FirebaseUser user = auth.getCurrentUser();
-        if (user == null) {
-            Log.d(TAG, "user is not authorized");
-        } else {
-            Log.d(TAG, "Authorized " + user.getUid());
-        }
-
-
-        auth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+    private void observeUserLD() {
+        viewModel.getUser().observe(this, new Observer<FirebaseUser>() {
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                Log.d(TAG, "onAuthStateChanged: " + firebaseAuth);
+            public void onChanged(FirebaseUser firebaseUser) {
+                Intent intent = ListDialogsActivity.newIntent(MainActivity.this);
+                startActivity(intent);
+                finish();
             }
         });
-
-
     }
 
     private void viewModelLogin() {
         viewModel.setLogin(new LoginViewModel.Login() {
-            @Override
-            public void launchListDialogs() {
-                Intent intent = ListDialogsActivity.newIntent(MainActivity.this);
-                startActivity(intent);
-            }
-
             @Override
             public void makeToast(String text) {
                 Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
@@ -78,14 +66,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void clickListeners() {
-
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String em = email.getText().toString().trim();
                 String pa = password.getText().toString().trim();
                 if (em != "" && pa != "") {
-                    viewModel.login(email.getText().toString(), password.getText().toString());
+                    viewModel.login(em, pa);
                 }
             }
         });
@@ -108,6 +95,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public static Intent newIntent(Context context) {
+        return new Intent(context, MainActivity.class);
+    }
 
     private void initViews() {
         forgotPassword = findViewById(R.id.forgot_password);

@@ -31,15 +31,15 @@ public class ListDialogsActivity extends AppCompatActivity {
         viewModel.setSignOut(new ListDialogsViewModel.SignOut() {
             @Override
             public void signOut() {
-                Intent intent = new Intent(ListDialogsActivity.this, MainActivity.class);
+                Intent intent = MainActivity.newIntent(ListDialogsActivity.this);
                 startActivity(intent);
+                finish();
             }
         });
     }
 
     private void initViews() {
         viewModel = new ViewModelProvider(this).get(ListDialogsViewModel.class);
-        viewModel.setAuth(FirebaseAuth.getInstance());
     }
 
 
@@ -51,11 +51,9 @@ public class ListDialogsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
         if (item.getItemId() == R.id.sign_out) {
             viewModel.signOut();
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -63,8 +61,7 @@ public class ListDialogsActivity extends AppCompatActivity {
 
 
     public static Intent newIntent(Context context) {
-        Intent intent = new Intent(context, ListDialogsActivity.class);
-        return intent;
+        return new Intent(context, ListDialogsActivity.class);
     }
 
 }
